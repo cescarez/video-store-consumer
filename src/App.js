@@ -19,9 +19,13 @@ function App() {
         <Nav />
         <Route path="/" exact component={Home}/>
         <Route path="/customer" component={Customer}/>
-        <Route path="/customerlist" render={(props)=><CustomerList baseURL={BASE_URL}/>} />
+        <Route path="/customerlist">
+          <CustomerList baseURL={BASE_URL}/>
+        </Route>
         <Route path="/video" component={Video}/>
-        <Route path="/videolibrary"><VideoLibrary baseURL={BASE_URL}/></Route>
+        <Route path="/videolibrary">
+          <VideoLibrary baseURL={BASE_URL}/>
+        </Route>
         <Route path="/search" component={Search}/>
       </div>
     </Router>
