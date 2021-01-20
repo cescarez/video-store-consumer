@@ -5,16 +5,12 @@ import { Link } from 'react-router-dom';
 import './CustomerList.css';
 
 
-const CustomerList = (props) => {
+const CustomerList = ({baseURL}) => {
   const [customers, setCustomers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  console.log(props);
-  console.log(`props.baseUrl: ${props.baseUrl}`)
-
   useEffect( ()=> {
-    // axios.get(`${baseUrl}/customers`)
-    axios.get(`http://localhost:3000/customers`)
+    axios.get(`${baseURL}/customers`)
       .then ((response) => {
         const apiCustomers = response.data
         // console.log(response);
@@ -32,8 +28,8 @@ const CustomerList = (props) => {
       <ul>
         {customers.map((customer)=>{
           return(
-            // <Link to={`${baseUrl}/customers/${customer.id}`}>
-            <Link to={`http://localhost:3000/customers/${customer.id}`}>
+            <Link to={`${baseURL}/customers/${customer.id}`}>
+            {/* // <Link to={`http://localhost:3000/customers/${customer.id}`}> */}
               <li>{customer.name}</li>
             </Link>
           );
