@@ -17,16 +17,16 @@ function App() {
       <div className="App">
         <Nav />
         <Switch>
-        <Route path="/" exact component={Home}/>
-        <Route path="/customer" component={Customer}/>
-        <Route path="/customerlist">
-          <CustomerList baseURL={BASE_URL}/>
-        </Route>
-        <Route path="/video/:id" component={Video}/>
-        <Route path="/videolibrary">
-          <VideoLibrary baseURL={BASE_URL}/>
-        </Route>
-        <Route path="/search" component={Search}/>
+          <Route path="/" exact component={Home}/>
+          <Route path="/customer" component={Customer}/>
+          <Route path="/customerlist">
+            <CustomerList baseURL={BASE_URL}/>
+          </Route>
+          <Route path="/videos/:id" component={Video}/>
+          <Route path="/videolibrary">
+            <VideoLibrary baseURL={BASE_URL}/>
+          </Route>
+          <Route path="/search" component={Search}/>
         </Switch>
       </div>
     </Router>

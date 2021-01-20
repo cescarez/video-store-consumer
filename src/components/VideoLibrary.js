@@ -29,7 +29,7 @@ const VideoLibrary = ({baseURL}) => {
         return(
        
           <Link to={`/videos/${video.id}`}>
-          <li>{video.title}</li>
+            <li>{video.title}</li>
           </Link>
         )
       })}
