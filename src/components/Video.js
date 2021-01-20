@@ -1,10 +1,18 @@
 import React from 'react';
 
 
-function Video() {
+const Video = () => {
   return (
+    <div>
+      {console.log('HELLO!!!')}
     <h3>Video</h3>
+    </div>
   );
 }
 
+
+
+
 export default Video;
+
+

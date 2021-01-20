@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import './VideoLibrary.css';
 
 
 const VideoLibrary = ({baseURL}) => {
@@ -28,7 +27,8 @@ const VideoLibrary = ({baseURL}) => {
       <div>
       {videos.map((video) => {
         return(
-          <Link to={`${baseURL}/videos/${video.id}`}>
+       
+          <Link to={`/videos/${video.id}`}>
           <li>{video.title}</li>
           </Link>
         )
