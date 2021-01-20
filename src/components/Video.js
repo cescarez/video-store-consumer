@@ -4,12 +4,23 @@ import axios from 'axios';
 
 const Video = ( { match }) => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [video, setVideo] = useState({});
+  const [video, setVideo] = useState({
+    availableInventory: 0,
+    inventory: 0,
+    title: '',
+    releaseDate: '',
+    overview: '',
+  });
+
   const videoTitle = match.params.title
+
   useEffect(() => {
       axios.get('http://localhost:3000/videos/' + videoTitle)
       .then((response) => {
-        const film = response.data;
+        const film = { ...response.data,
+          availableInventory: response.data.available_inventory, 
+          releaseDate: response.data.release_date,
+        };
         console.log(film)
         setVideo(film)
       })
@@ -19,10 +30,22 @@ const Video = ( { match }) => {
         console.log(message);
       })
     }, [videoTitle]);
+
+  const videoInfo = () => {
+    return (
+      <div>
+        <h3>{video.title}</h3>
+        <small>{video.releaseDate}</small>
+        <p>{video.overview}</p>
+        <p>Available: {video.availableInventory} of {video.inventory}</p>
+      </div>
+    )
+  }
+
   return (
     <div>
-      {console.log(match.params.title)}
       <h3>Video</h3>
+      { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : videoInfo() }
     </div>
   );
 }
