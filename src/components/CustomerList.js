@@ -10,6 +10,7 @@ const CustomerList = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   console.log(props);
+  console.log(`props.baseUrl: ${props.baseUrl}`)
 
   useEffect( ()=> {
     // axios.get(`${baseUrl}/customers`)
