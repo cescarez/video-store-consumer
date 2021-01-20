@@ -31,10 +31,12 @@ const Video = ( { match }) => {
       })
     }, [videoTitle]);
 
+
   const videoInfo = () => {
     return (
       <div>
         <h3>{video.title}</h3>
+        <button>Select Video for Rental</button><br/>
         <small>{video.releaseDate}</small>
         <p>{video.overview}</p>
         <p>Available: {video.availableInventory} of {video.inventory}</p>
@@ -44,7 +46,6 @@ const Video = ( { match }) => {
 
   return (
     <div>
-      <h3>Video</h3>
       { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : videoInfo() }
     </div>
   );
