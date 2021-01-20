@@ -10,7 +10,7 @@ import VideoLibrary from './components/VideoLibrary';
 import Search from './components/Search';
 import Nav from './components/Nav';
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = 'http://localhost:3000'
 
 function App() {
   return (
