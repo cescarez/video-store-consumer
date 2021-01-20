@@ -3,7 +3,7 @@ import React from 'react';
 
 function VideoLibrary() {
   return (
-    //return some JSX here
+    <h3>Library</h3>
   );
 }
 

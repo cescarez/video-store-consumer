@@ -3,7 +3,7 @@ import React from 'react';
 
 function Customer() {
   return (
-    //return some JSX here
+    <h3>Customers</h3>
   );
 }
 

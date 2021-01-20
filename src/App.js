@@ -2,21 +2,28 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import Customer from './components/Customer';
+import CustomerList from './components/CustomerList';
+import Video from './components/Video';
+import VideoLibrary from './components/VideoLibrary';
+import Search from './components/Search';
+import Nav from './components/Nav';
 
-class App extends Component {
-  render() {
-    return (
+function App() {
+  return (
+    <Router>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Nav />
+        <Route path="/" exact component={Home}/>
+        <Route path="/customer" component={Customer}/>
+        <Route path="/customerlist" component={CustomerList}/>
+        <Route path="/video" component={Video}/>
+        <Route path="/videolibrary" component={VideoLibrary}/>
+        <Route path="/search" component={Search}/>
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;
