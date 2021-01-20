@@ -21,7 +21,7 @@ function App() {
         <Route path="/customer" component={Customer}/>
         <Route path="/customerlist" render={(props)=><CustomerList baseURL={BASE_URL}/>} />
         <Route path="/video" component={Video}/>
-        <Route path="/videolibrary" render={(props)=><VideoLibrary baseURL={BASE_URL}/>} />
+        <Route path="/videolibrary"><VideoLibrary baseURL={BASE_URL}/></Route>
         <Route path="/search" component={Search}/>
       </div>
     </Router>

@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom';
 // import './VideoLibrary.css';
 
 
-const VideoLibrary = () => {
-  const BASE_URL = 'http://localhost:3000'
+const VideoLibrary = ({baseURL}) => {
   const [videos, setVideos] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    axios.get(BASE_URL + '/videos')
+    axios.get(baseURL + '/videos')
     .then((response) => {
       const films = response.data;
       setVideos(films);
@@ -21,7 +20,7 @@ const VideoLibrary = () => {
       setErrorMessage(message);
       console.log(message);
     })
-  }, []);
+  }, [baseURL]);
 
   const listVideos = () => {
     return (
@@ -29,7 +28,7 @@ const VideoLibrary = () => {
       <div>
       {videos.map((video) => {
         return(
-          <Link to={`http://localhost:3000/customers/${video.title}`}>
+          <Link to={`${baseURL}/videos/${video.id}`}>
           <li>{video.title}</li>
           </Link>
         )
