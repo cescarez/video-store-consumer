@@ -13,8 +13,8 @@ function Nav() {
         <Link to='/customers' className="link">
           <li>Customers</li>
         </Link>
-        <Link to='/library' className="link">
-          <li>Library</li>
+        <Link to='/videolibrary' className="link">
+          <li>Video Library</li>
         </Link>
         <Link to='/search' className="link">
           <li>Search Videos</li>

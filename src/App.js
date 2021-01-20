@@ -10,6 +10,8 @@ import VideoLibrary from './components/VideoLibrary';
 import Search from './components/Search';
 import Nav from './components/Nav';
 
+const BASE_URL = 'http://localhost:3001'
+
 function App() {
   return (
     <Router>
@@ -19,7 +21,7 @@ function App() {
         <Route path="/customer" component={Customer}/>
         <Route path="/customerlist" component={CustomerList}/>
         <Route path="/video" component={Video}/>
-        <Route path="/videolibrary" component={VideoLibrary}/>
+        <Route path="/videolibrary" render={(props)=><VideoLibrary baseURL={BASE_URL}/>}/>
         <Route path="/search" component={Search}/>
       </div>
     </Router>
