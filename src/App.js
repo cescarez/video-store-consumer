@@ -22,7 +22,7 @@ function App() {
           <Route path="/customerlist">
             <CustomerList baseURL={BASE_URL}/>
           </Route>
-          <Route path="/videos/:id" component={Video}/>
+          <Route path="/videos/:title" component={Video}/>
           <Route path="/videolibrary">
             <VideoLibrary baseURL={BASE_URL}/>
           </Route>

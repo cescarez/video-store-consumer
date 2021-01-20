@@ -28,7 +28,7 @@ const VideoLibrary = ({baseURL}) => {
       {videos.map((video) => {
         return(
        
-          <Link to={`/videos/${video.id}`}>
+          <Link to={`/videos/${video.title}`}>
             <li>{video.title}</li>
           </Link>
         )
