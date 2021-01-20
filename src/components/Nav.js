@@ -10,7 +10,7 @@ function Nav() {
         <Link to='/' className="link">
           <li>Home</li>
         </Link>
-        <Link to='/customers' className="link">
+        <Link to='/customerlist' className="link">
           <li>Customers</li>
         </Link>
         <Link to='/videolibrary' className="link">
