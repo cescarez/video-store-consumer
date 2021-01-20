@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const Video = () => {
+const Video = ( { match }) => {
   return (
     <div>
-      {console.log('HELLO!!!')}
+      {console.log(match)}
     <h3>Video</h3>
     </div>
   );
