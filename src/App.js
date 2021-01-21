@@ -1,7 +1,8 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'; //only needs to be in App.js
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Button } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
+
 import Home from './components/Home';
 import Customer from './components/Customer';
 import CustomerList from './components/CustomerList';
@@ -26,10 +27,10 @@ function App() {
       <div className="App">
         <Nav />
         <div>
-          { (selectedVideoTitle) ? <div className='router__div--selected-item'> Selected Video for Rental: {selectedVideoTitle} </div> : null }
-          { (selectedCustomerId) ? <div className='router__div--selected-item'> Selected Customer for Rental: {selectedCustomerName}, id: {selectedCustomerId} </div> : null }
+          { (selectedVideoTitle) ? <Badge variant='info'> Selected Video for Rental: {selectedVideoTitle} </Badge> : null }
+          { (selectedCustomerId) ? <Badge variant='info'> Selected Customer for Rental: {selectedCustomerName}, id: {selectedCustomerId} </Badge> : null }
           <br/>
-          { (selectedVideoTitle && selectedCustomerId) ? <button className='router__button--check-out' variant='success'>Rent {selectedVideoTitle} for Customer {selectedCustomerName}, id: {selectedCustomerId}</button> : null}
+          { (selectedVideoTitle && selectedCustomerId) ? <Button variant='outline-primary' size='sm'>Rent {selectedVideoTitle} for Customer {selectedCustomerName}, id: {selectedCustomerId}</Button> : null}
         </div>
         <Switch>
           <Route path="/" exact component={Home}/>
