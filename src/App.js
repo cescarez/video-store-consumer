@@ -18,7 +18,7 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/" exact component={Home}/>
-          <Route path="/customer" component={Customer}/>
+          <Route path="/customers/:id" component={Customer}/>
           <Route path="/customerlist">
             <CustomerList baseURL={BASE_URL}/>
           </Route>

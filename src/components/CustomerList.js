@@ -28,9 +28,8 @@ const CustomerList = ({baseURL}) => {
       <ul>
         {customers.map((customer)=>{
           return(
-            <Link to={`${baseURL}/customers/${customer.id}`}>
-            {/* // <Link to={`http://localhost:3000/customers/${customer.id}`}> */}
-              <li>{customer.name}</li>
+            <Link to={`/customers/${customer.id}`}>
+              <li key={customer.id}>{customer.name}</li>
             </Link>
           );
         })}
