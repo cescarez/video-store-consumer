@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 import Home from './components/Home';
 import Customer from './components/Customer';
 import CustomerList from './components/CustomerList';
