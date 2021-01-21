@@ -31,12 +31,16 @@ const Video = ( { match }) => {
       })
     }, [videoTitle]);
 
+  const onSelectVideoForRental = () => {
+    sessionStorage.setItem('selectedVideoTitle', video.title)
+    console.log(`${video.title} selected for rental`)
+  }
 
   const videoInfo = () => {
     return (
       <div>
         <h3>{video.title}</h3>
-        <button>Select Video for Rental</button><br/>
+        <button onClick={onSelectVideoForRental}>Select Video for Rental</button><br/>
         <small>{video.releaseDate}</small>
         <p>{video.overview}</p>
         <p>Available: {video.availableInventory} of {video.inventory}</p>

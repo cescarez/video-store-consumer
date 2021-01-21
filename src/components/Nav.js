@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
 function Nav() {
+  const selectedVideoTitle = sessionStorage.getItem('selectedVideoTitle')
+  console.log(`selectedVideoTitle: ${selectedVideoTitle}`)
+  const selectedCustomer = sessionStorage.getItem('selectedCustomer')
+  console.log(`selectedCustomer: ${selectedCustomer}`)
+
+  // wrap this in a function???
+
   return (
     <nav className="navbar">
       <h3>WELCOME AGAIN</h3>
@@ -20,6 +27,8 @@ function Nav() {
           <li>Search Videos</li>
         </Link>
       </ul>
+        { selectedVideoTitle ? <div>Selected Video for Rental: {selectedVideoTitle}</div> : null }
+        { selectedCustomer ? <div>Selected Customer for Rental: {selectedCustomer.name}</div> : null }
     </nav>
   )
 };
