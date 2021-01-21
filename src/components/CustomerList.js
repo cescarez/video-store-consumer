@@ -21,7 +21,7 @@ const CustomerList = ({baseURL}) => {
         setErrorMessage(message);
         console.log(message);
       })
-  }, [])
+  }, [baseURL])
 
   const listCustomers = () => {
     return (

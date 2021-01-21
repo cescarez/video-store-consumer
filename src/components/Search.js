@@ -43,6 +43,19 @@ function Search({baseURL}) {
       })
   }
 
+  const addToCollection = (result) => {
+    
+    axios.post('http://localhost:3000/videos', result )
+    .then((response) => {
+    const message =`${result.title} Added to Collection!`; 
+    console.log(message)
+    })
+    .catch((error) => {
+      const message=`Error. Video could not be added to collection. ${error.message}.`;
+      setErrorMessage(message);
+      console.log(message);
+    })
+  }
 
   // external_id: 9598
   // image_url: "https://image.tmdb.org/t/p/w185/zKuQMtnbVTz9DsOnOJmlW71v4qH.jpg"
@@ -59,7 +72,7 @@ function Search({baseURL}) {
                 {result.title}
                 <small>{result.release_date}</small>
                 <img src={result.image_url} alt='movie poster' />
-                { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button>Add Title to Library</button> }
+                { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={addToCollection(result)}>Add Title to Library</button> }
               </li>
             );
           })
