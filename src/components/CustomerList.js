@@ -24,6 +24,12 @@ const CustomerList = ({baseURL}) => {
       })
   }, [baseURL])
 
+  const onSelectCustomerForRental = (customer) => {
+    sessionStorage.setItem('selectedCustomerId', customer.id)
+    sessionStorage.setItem('selectedCustomerName', customer.name)
+    console.log(`${customer.name}, id: ${customer.id} selected for rental`)
+  }
+
   const listCustomers = () => {
     return (
       <Table striped bordered hover size="sm">
@@ -48,7 +54,7 @@ const CustomerList = ({baseURL}) => {
                 </th>
                 <th>${customer.account_credit}</th>
                 <th>{customer.videos_checked_out_count}</th>
-                <th width='10%'><Button variant='secondary'>Select</Button></th>
+                <th width='10%'><Button variant='secondary' onClick={() => {onSelectCustomerForRental(customer)}}>Select</Button></th>
               </tr>
             );
           })}
