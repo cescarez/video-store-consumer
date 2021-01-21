@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Search.css';
 
-function Search({ videoLibrary, addToCollection }) {
+function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [libraryTitles, setLibraryTitles] = useState([]);
@@ -18,20 +17,6 @@ function Search({ videoLibrary, addToCollection }) {
   const onInputChange = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
-  }
-
-  const onSendExternalRequest = () => {
-    axios.get('http://localhost:3000/videos?query=' + searchTerm)
-      .then((response) => {
-        const apiSearchResults = response.data;
-        setSearchResults(apiSearchResults);
-      })
-
-      .catch((error) => {
-        const message=`Search failed. ${error.message}.`;
-        setErrorMessage(message);
-        console.log(message);
-      })
   }
 
 
@@ -70,7 +55,7 @@ function Search({ videoLibrary, addToCollection }) {
         name='search-term' 
         onChange={onInputChange}>
       </input>
-      <button onClick={onSendExternalRequest}>Search</button>
+      <button onClick={() => onSearchRequest(searchTerm)}>Search</button>
       { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : displaySearchResults() }
     </div>
   );

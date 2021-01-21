@@ -20,6 +20,8 @@ function App() {
   const [customerList, setCustomerList] = useState([]);
   const [videoLibrary, setVideoLibrary] = useState([]);
 
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     axios.get(BASE_URL + '/videos')
     .then((response) => {
@@ -46,12 +48,26 @@ function App() {
       })
   }, []);
 
+  //search results
+  const onSearchRequestCallback = (searchTerm) => {
+    axios.get(BASE_URL + '/videos?query=' + searchTerm)
+      .then((response) => {
+        const apiSearchResults = response.data;
+        setSearchResults(apiSearchResults);
+      })
+      .catch((error) => {
+        const message=`Search failed. ${error.message}.`;
+        setErrorMessage(message);
+        console.log(message);
+      })
+  }
+
   const addToCollectionCallback = (result) => {
     axios.post(BASE_URL + '/videos', result )
     .then((response) => {
       const message =`${result.title} Added to Collection!`; 
-      const newVideoLibrary = [...videoLibrary];
-      setVideoLibrary(newVideoLibrary);
+      const newSearchResults = [...searchResults];
+      setSearchResults(newSearchResults);
       console.log(message);
     })
     .catch((error) => {
@@ -78,7 +94,7 @@ function App() {
               <VideoLibrary videoLibrary={videoLibrary} />
             </Route>
             <Route path="/search">
-              <Search videoLibrary={videoLibrary} addToCollection={addToCollectionCallback} />
+              <Search videoLibrary={videoLibrary} searchResults={searchResults} addToCollection={addToCollectionCallback} onSearchRequest={onSearchRequestCallback} />
             </Route>
           </Switch>
         }
