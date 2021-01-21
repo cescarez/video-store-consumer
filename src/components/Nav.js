@@ -5,10 +5,8 @@ import { Link } from 'react-router-dom';
 function Nav() {
   const selectedVideoTitle = sessionStorage.getItem('selectedVideoTitle')
   console.log(`selectedVideoTitle: ${selectedVideoTitle}`)
-  const selectedCustomer = sessionStorage.getItem('selectedCustomer')
-  console.log(`selectedCustomer: ${selectedCustomer}`)
-
-  // wrap this in a function???
+  const selectedCustomerId = sessionStorage.getItem('selectedCustomerId')
+  console.log(`selectedCustomer: ${selectedCustomerId}`)
 
   return (
     <nav className="navbar">
@@ -27,8 +25,8 @@ function Nav() {
           <li>Search Videos</li>
         </Link>
       </ul>
-        { selectedVideoTitle ? <div>Selected Video for Rental: {selectedVideoTitle}</div> : null }
-        { selectedCustomer ? <div>Selected Customer for Rental: {selectedCustomer.name}</div> : null }
+        { (selectedVideoTitle && selectedCustomerId) ? <button>Rent {selectedVideoTitle}</button> : null}
+        { (selectedVideoTitle && !selectedCustomerId) ? <div>Selected Video for Rental: {selectedVideoTitle}</div> : null }
     </nav>
   )
 };

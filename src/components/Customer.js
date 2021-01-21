@@ -40,12 +40,18 @@ const Customer = ( { match }) => {
     }, [customerId]);
 
 
+  const onSelectCustomerForRental = () => {
+    sessionStorage.setItem('selectedCustomerId', customer.id)
+    console.log(`${customer.name}, id: ${customer.id} selected for rental`)
+  }
+
   const customerInfo = () => {
     return (
       <div>
         <h3>{customer.name}</h3>
-        <button>Select Customer for Rental</button><br/>
-        <small>Videos Checked Out: {customer.videos_checked_out_count}</small>
+        <button onClick={onSelectCustomerForRental}>Select Customer for Rental</button><br/>
+        <small>Account Credit: ${customer.accountCredit}</small><br/>
+        <small>Videos Checked Out: {customer.videosCheckedOutCount}</small>
       </div>
 
     )
