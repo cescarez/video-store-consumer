@@ -26,7 +26,9 @@ function App() {
           <Route path="/videolibrary">
             <VideoLibrary baseURL={BASE_URL}/>
           </Route>
-          <Route path="/search" component={Search}/>
+          <Route path="/search">
+            <Search baseURL={BASE_URL} />
+          </Route>
         </Switch>
       </div>
     </Router>
