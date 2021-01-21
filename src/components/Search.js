@@ -9,14 +9,17 @@ function Search() {
 
   const onInputChange = (event) => {
     const newSearchTerm = event.target.value;
+    console.log(newSearchTerm)
     setSearchTerm(newSearchTerm);
   }
 
   const onSendExternalRequest = () => {
-    axios.get('https://api.themoviedb.org/3/search/movie?query='+ searchTerm + '&api_key=' + )
+    axios.get('http://localhost:3000/videos?query=' + searchTerm)
       .then((response) => {
-        const apiSearchResults = response.data.results;
+        const apiSearchResults = response.data;
         setSearchResults(apiSearchResults);
+        console.log(apiSearchResults)
+        console.log(response)
       })
 
       .catch((error) => {
