@@ -27,3 +27,13 @@
 .link:hover{
   color: white;
 }
+
+.router__div--selected-item {
+  background-color: rgb(165, 127, 255);
+  font-size: smaller;
+}
+
+.router__button--check-out {
+  /* color:cadetblue; */
+  background-color: rgb(77, 253, 253);
+}
