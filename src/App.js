@@ -87,11 +87,11 @@ function App() {
             <Route path="/" exact component={Home}/>
             <Route path="/customers/:id" component={Customer}/>
             <Route path="/customerlist">
-              <CustomerList customerList={customerList}/>
+              <CustomerList customerList={customerList} baseURL={BASE_URL}/>
             </Route>
             <Route path="/videos/:title" component={Video}/>
             <Route path="/videolibrary">
-              <VideoLibrary videoLibrary={videoLibrary} />
+              <VideoLibrary videoLibrary={videoLibrary} baseURL={BASE_URL} />
             </Route>
             <Route path="/search">
               <Search videoLibrary={videoLibrary} searchResults={searchResults} addToCollection={addToCollectionCallback} onSearchRequest={onSearchRequestCallback} />

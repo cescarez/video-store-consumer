@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 
-const Customer = ( { match }) => {
+const Customer = ( { match, location }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [customer, setCustomer] = useState({
     id: -1,
@@ -18,9 +18,11 @@ const Customer = ( { match }) => {
   });
 
   const customerId = match.params.id
+  const { baseURL } = location.state
+
 
   useEffect(() => {
-      axios.get('http://localhost:3000/customers/' + customerId)
+      axios.get(baseURL + '/customers/' + customerId)
       .then((response) => {
         console.log(response)
         const apiCustomer = { ...response.data,

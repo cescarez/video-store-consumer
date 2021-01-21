@@ -5,7 +5,7 @@ import { Table } from 'react-bootstrap';
 import './CustomerList.css';
 
 
-const CustomerList = ({ customerList }) => {
+const CustomerList = ({ customerList, baseURL }) => {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
@@ -14,15 +14,6 @@ const CustomerList = ({ customerList }) => {
 
   const listCustomers = () => {
     return (
-      // <ul>
-      //   {customers.map((customer)=>{
-      //     return(
-      //       <Link to={`/customers/${customer.id}`}>
-      //         <li key={customer.id}>{customer.name}</li>
-      //       </Link>
-      //     );
-      //   })}
-      // </ul>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -39,7 +30,12 @@ const CustomerList = ({ customerList }) => {
               <tr>
                 <th>{customer.id}</th>
                 <th>
-                  <Link to={`/customers/${customer.id}`}>
+                  <Link to={{
+                    pathname:`/customers/${customer.id}`,
+                    state: {
+                      baseURL: baseURL, 
+                    }
+                  }}>
                     {customer.name}
                   </Link>
                 </th>

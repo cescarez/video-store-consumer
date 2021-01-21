@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 
-const Video = ( { match }) => {
+const Video = ( { match, location }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [video, setVideo] = useState({
     availableInventory: 0,
@@ -13,9 +13,10 @@ const Video = ( { match }) => {
   });
 
   const videoTitle = match.params.title
+  const { baseURL } = location.state
 
   useEffect(() => {
-      axios.get('http://localhost:3000/videos/' + videoTitle)
+      axios.get(baseURL + '/videos/' + videoTitle)
       .then((response) => {
         const film = { ...response.data,
           availableInventory: response.data.available_inventory, 
@@ -29,7 +30,7 @@ const Video = ( { match }) => {
         setErrorMessage(message);
         console.log(message);
       })
-    }, [videoTitle]);
+    }, [videoTitle, baseURL]);
 
   const onSelectVideoForRental = () => {
     sessionStorage.setItem('selectedVideoTitle', video.title)
