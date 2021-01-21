@@ -26,7 +26,7 @@ const Customer = ( { match }) => {
         const apiCustomer = { ...response.data,
           registeredAt: response.data.registered_at, 
           postalCode: response.data.postal_code,
-          accountCredit: response.data.accountCredit,
+          accountCredit: response.data.account_credit,
           videosCheckedOutCount: response.data.videos_checked_out_count,
         };
         console.log(apiCustomer)
