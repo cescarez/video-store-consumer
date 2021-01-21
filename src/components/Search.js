@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Search.css';
 
-function Search({ videoLibrary }) {
+function Search({ videoLibrary, addToCollection }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -12,7 +12,6 @@ function Search({ videoLibrary }) {
     const apiLibraryTitles = videoLibrary.map((movie) =>{
       return movie.title;
     });
-    console.log(apiLibraryTitles)
     setLibraryTitles(apiLibraryTitles);
   }, [videoLibrary])
 
@@ -35,18 +34,7 @@ function Search({ videoLibrary }) {
       })
   }
 
-  const addToCollection = (result) => {
-    axios.post('http://localhost:3000/videos', result )
-    .then((response) => {
-    const message =`${result.title} Added to Collection!`; 
-    console.log(message)
-    })
-    .catch((error) => {
-      const message=`Error. Video could not be added to collection. ${error.message}.`;
-      setErrorMessage(message);
-      console.log(message);
-    })
-  }
+
 
   const displaySearchResults = () => {
     return (
@@ -60,7 +48,6 @@ function Search({ videoLibrary }) {
                 <h3>{result.title}</h3>
                 <span><small>Release Date: {result.release_date}</small></span>
                 <img src={result.image_url} alt='movie poster' />
-                {console.log(libraryTitles)}
                 { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={() => addToCollection(result)}>Add Title to Library</button> }
               </li>
               </div>

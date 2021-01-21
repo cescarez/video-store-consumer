@@ -46,6 +46,21 @@ function App() {
       })
   }, []);
 
+  const addToCollectionCallback = (result) => {
+    axios.post(BASE_URL + '/videos', result )
+    .then((response) => {
+      const message =`${result.title} Added to Collection!`; 
+      const newVideoLibrary = [...videoLibrary];
+      setVideoLibrary(newVideoLibrary);
+      console.log(message);
+    })
+    .catch((error) => {
+      const message=`Error. Video could not be added to collection. ${error.message}.`;
+      setErrorMessage(message);
+      console.log(message);
+    })
+  }
+
   return (
     <Router>
       <div className="App">
@@ -63,7 +78,7 @@ function App() {
               <VideoLibrary videoLibrary={videoLibrary} />
             </Route>
             <Route path="/search">
-              <Search videoLibrary={videoLibrary} />
+              <Search videoLibrary={videoLibrary} addToCollection={addToCollectionCallback} />
             </Route>
           </Switch>
         }
