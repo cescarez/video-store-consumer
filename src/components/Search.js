@@ -44,7 +44,6 @@ function Search({baseURL}) {
   }
 
   const addToCollection = (result) => {
-    
     axios.post('http://localhost:3000/videos', result )
     .then((response) => {
     const message =`${result.title} Added to Collection!`; 
