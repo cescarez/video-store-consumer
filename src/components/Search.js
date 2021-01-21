@@ -9,7 +9,6 @@ function Search() {
 
   const onInputChange = (event) => {
     const newSearchTerm = event.target.value;
-    console.log(newSearchTerm)
     setSearchTerm(newSearchTerm);
   }
 
@@ -18,8 +17,6 @@ function Search() {
       .then((response) => {
         const apiSearchResults = response.data;
         setSearchResults(apiSearchResults);
-        console.log(apiSearchResults)
-        console.log(response)
       })
 
       .catch((error) => {
@@ -30,11 +27,36 @@ function Search() {
   }
 
 
+  // external_id: 9598
+  // image_url: "https://image.tmdb.org/t/p/w185/zKuQMtnbVTz9DsOnOJmlW71v4qH.jpg"
+  // overview: "Babe is..."
+  // release_date: "1995-07-18"
+  // title: "Babe"
+  const displaySearchResults = () => {
+    return (
+      <ul>
+        {
+          searchResults.map((result) => {
+            return(
+              <li key={result.external_id}>
+                {result.title}
+                <small>{result.release_date}</small>
+                <img src={result.image_url} alt='movie poster' />
+              </li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+
+
   return (
     <div>
       <h3>Search</h3>
       <input placeholder='Enter a movie title' name='search-term' onChange={onInputChange} ></input>
       <button onClick={onSendExternalRequest}>Search</button>
+      { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : displaySearchResults() }
     </div>
   );
 }
