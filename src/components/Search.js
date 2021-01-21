@@ -71,7 +71,7 @@ function Search({baseURL}) {
                 {result.title}
                 <small>{result.release_date}</small>
                 <img src={result.image_url} alt='movie poster' />
-                { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={addToCollection(result)}>Add Title to Library</button> }
+                { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={() => addToCollection(result)}>Add Title to Library</button> }
               </li>
             );
           })
