@@ -1,0 +1,47 @@
+.movie {
+  width: 300px;
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: #373b69; */
+}
+
+.movie img {
+  max-width: 100%;
+  margin: 1rem;
+  width: 250px;
+}
+
+.movie-info {
+  list-style: none;
+  list-style: none;
+}
+
+.searchbox{
+
+  
+ 
+  min-width: 5rem;
+  width: 80%;
+  padding: .5rem;
+  text-align: center;
+  margin: 30px;
+
+  border: none;
+  outline: none;
+  background: none;
+
+  background-color: #EEE;
+  border-radius: 60px;
+
+  color: #53565A;
+  font-size: 20px;
+  font-weight: 300;
+
+  transition: 0.4s ease-out; 
+}
+
+.searchbox:focus{
+  box-shadow: 0px 0px 8px 3px #0EA4C1;
+}
+

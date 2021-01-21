@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import './Search.css';
+import './Search.css';
 
 function Search({baseURL}) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -56,20 +56,16 @@ function Search({baseURL}) {
     })
   }
 
-  // external_id: 9598
-  // image_url: "https://image.tmdb.org/t/p/w185/zKuQMtnbVTz9DsOnOJmlW71v4qH.jpg"
-  // overview: "Babe is..."
-  // release_date: "1995-07-18"
-  // title: "Babe"
   const displaySearchResults = () => {
     return (
-      <ul>
+      <div className="movie">
+      <ul className="movie-info">
         {
           searchResults.map((result) => {
             return(
               <li key={result.external_id}>
-                {result.title}
-                <small>{result.release_date}</small>
+                <h3>{result.title}</h3>
+                <span><small>Release Date: {result.release_date}</small></span>
                 <img src={result.image_url} alt='movie poster' />
                 { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={() => addToCollection(result)}>Add Title to Library</button> }
               </li>
@@ -77,6 +73,7 @@ function Search({baseURL}) {
           })
         }
       </ul>
+      </div>
     );
   }
 
@@ -84,7 +81,13 @@ function Search({baseURL}) {
   return (
     <div>
       <h3>Search</h3>
-      <input placeholder='Enter a movie title' name='search-term' onChange={onInputChange} ></input>
+      <input 
+        type='text'
+        className='searchbox'
+        placeholder='Enter a movie title' 
+        name='search-term' 
+        onChange={onInputChange}>
+      </input>
       <button onClick={onSendExternalRequest}>Search</button>
       { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : displaySearchResults() }
     </div>

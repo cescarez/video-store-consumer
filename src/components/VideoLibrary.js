@@ -27,9 +27,9 @@ const VideoLibrary = ({baseURL}) => {
       <div>
       {videos.map((video) => {
         return(
-       
           <Link to={`/videos/${video.title}`}>
             <li>{video.title}</li>
+            <img src={video.image_url} alt='movie poster' />
           </Link>
         )
       })}
