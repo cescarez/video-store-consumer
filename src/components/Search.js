@@ -2,27 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Search.css';
 
-function Search({baseURL}) {
+function Search({ videoLibrary }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [libraryTitles, setLibraryTitles] = useState([]);
   useEffect(() => {
-    axios.get(baseURL + '/videos')
-    .then((response) => {
-      const films = response.data.map((movie) =>{
-        return movie.title;
-      });
-      setLibraryTitles(films);
-      console.log(films)
-    })
-    .catch((error) => {
-      const message=`Video list did not load. ${error.message}.`;
-      setErrorMessage(message);
-      console.log(message);
-    })
-  }, [baseURL])
+    const apiLibraryTitles = videoLibrary.map((movie) =>{
+      return movie.title;
+    });
+    setLibraryTitles(apiLibraryTitles);
+  }, [])
 
   const onInputChange = (event) => {
     const newSearchTerm = event.target.value;
