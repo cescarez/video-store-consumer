@@ -63,12 +63,14 @@ function Search({baseURL}) {
         {
           searchResults.map((result) => {
             return(
+              <div className="container">
               <li key={result.external_id}>
                 <h3>{result.title}</h3>
                 <span><small>Release Date: {result.release_date}</small></span>
                 <img src={result.image_url} alt='movie poster' />
                 { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={() => addToCollection(result)}>Add Title to Library</button> }
               </li>
+              </div>
             );
           })
         }
