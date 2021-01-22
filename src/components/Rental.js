@@ -10,8 +10,6 @@ const Rental = () => {
   const storedVideoTitle = sessionStorage.getItem('selectedVideoTitle');
   const storedCustomerId = sessionStorage.getItem('selectedCustomerId');
   const storedCustomerName = sessionStorage.getItem('selectedCustomerName');
-  console.log(`selectedVideoTitle: ${selectedVideoTitle}`)
-  console.log(`selectedCustomer: ${selectedCustomerName}, id: ${selectedCustomerId}`)
 
   useEffect(() => {
 

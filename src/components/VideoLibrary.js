@@ -12,19 +12,19 @@ const VideoLibrary = ({videoLibrary, baseURL}) => {
   const listVideos = () => {
     return (
       <div>
-      {videos.map((video) => {
-        return(
-          <Link to={{
-            pathname:`/videos/${video.title}`,
-            state: {
-              baseURL: baseURL, 
-            }
-          }}>
-            <li>{video.title}</li>
-            <img src={video.image_url} alt='movie poster' />
-          </Link>
-        )
-      })}
+        {videos.map((video) => {
+          return(
+            <Link to={{
+              pathname:`/videos/${video.title}`,
+              state: {
+                baseURL: baseURL, 
+              }
+            }}>
+              <li>{video.title}</li>
+              <img src={video.image_url} alt='movie poster' />
+            </Link>
+          )
+        })}
       </div>
     )
   }

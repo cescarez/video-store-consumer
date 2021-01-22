@@ -62,7 +62,6 @@ const Customer = ( { match, location }) => {
   useEffect(() => {
     axios.get(baseURL + '/customers/' + customerId + '/history')
       .then((response) =>{
-        console.log(response.data)
         if (response.data) {
           setRentalHistory(response.data);
         }
