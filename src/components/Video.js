@@ -18,6 +18,7 @@ const Video = ( { match, location }) => {
   const videoTitle = match.params.title
   const { baseURL } = location.state
 
+  //get video info
   useEffect(() => {
       axios.get(baseURL + '/videos/' + videoTitle)
       .then((response) => {
@@ -81,10 +82,12 @@ const Video = ( { match, location }) => {
     axios.post(baseURL + '/rentals/' + videoTitle + '/return', videoToReturn)
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
-        const newCurrentRentals = [...currentRentals]
-        setCurrentRentals(newCurrentRentals);
-        const newRentalHistory = [...rentalHistory]
-        setRentalHistory(newRentalHistory);
+
+        // const newCurrentRentals = [...currentRentals]
+        // setCurrentRentals(newCurrentRentals);
+        // const newRentalHistory = [...rentalHistory]
+        // setRentalHistory(newRentalHistory);
+
         console.log(message);
       })
       .catch((error) => {

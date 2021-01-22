@@ -89,10 +89,12 @@ const Customer = ( { match, location }) => {
     axios.post(baseURL + '/rentals/' + videoTitle + '/return', videoToReturn)
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
+
         const newCurrentRentals = [...currentRentals]
         setCurrentRentals(newCurrentRentals);
         const newRentalHistory = [...rentalHistory]
         setRentalHistory(newRentalHistory);
+
         console.log(message);
       })
       .catch((error) => {
@@ -106,19 +108,18 @@ const Customer = ( { match, location }) => {
 
   const listVideos = (videos) => {
     return (
-      <div>
-      {videos.map((video) => {
-        return(
-          <Table striped bordered hover size="sm">
-            <thead>
-              <tr>
-                <th>Movie Title</th>
-                <th>Date Checked Out</th>
-                <th>Date Due</th>
-                <th>Date Checked In</th>
-              </tr>
-            </thead>
-            <tbody>
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Movie Title</th>
+            <th>Date Checked Out</th>
+            <th>Date Due</th>
+            <th>Date Checked In</th>
+          </tr>
+        </thead>
+        <tbody>
+          {videos.map((video) => {
+            return(
               <tr>
                 <td>
                   <Link to={{
@@ -134,12 +135,10 @@ const Customer = ( { match, location }) => {
                 <td>{video.due_date}</td>
                 <td>{video.checkin_date ? video.checkin_date : <Button onClick={()=>onReturnVideo(video.title)}>Return Title</Button>}</td>
               </tr>
-            </tbody>
-
-          </Table>
-        )
-      })}
-      </div>
+            )
+          })}
+        </tbody>
+      </Table>
     )
   }
 
