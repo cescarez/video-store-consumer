@@ -39,7 +39,7 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
 
 
   //current rentals
-  useEffect(() => {
+  const loadCurrentRentals = () => {
     axios.get(baseURL + '/videos/' + videoTitle + '/current')
       .then((response) =>{
         if (response.data) {
@@ -51,10 +51,13 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
         setErrorMessage(message);
         console.log(message);
       })
-  }, [baseURL, videoTitle])
+  }
+  useEffect(() => {
+    loadCurrentRentals();
+  }, [])
 
   //rental history (already checked in)
-  useEffect(() => {
+  const loadRentalHistory = () => {
     axios.get(baseURL + '/videos/' + videoTitle + '/history')
       .then((response) =>{
         if (response.data) {
@@ -66,7 +69,11 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
         setErrorMessage(message);
         console.log(message);
       })
-  }, [baseURL, videoTitle])
+  }
+   
+  useEffect(() => {
+    loadRentalHistory();
+  }, [])
 
   const onReturnVideo = (customerId) => {
     const videoToReturn = {
@@ -82,10 +89,8 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
         console.log('customer key:')
         console.log(response.data.customer)
 
-        const newCurrentRentals = currentRentals.filter(customer => (customer.id !== currentCustomer.id) ) 
-        setCurrentRentals(newCurrentRentals);
-        const newRentalHistory = [...rentalHistory, currentCustomer]
-        setRentalHistory(newRentalHistory);
+        loadCurrentRentals();
+        loadRentalHistory();
 
         console.log(message);
       })

@@ -25,25 +25,26 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
   const customerId = match.params.id
 
   useEffect(() => {
-      axios.get(baseURL + '/customers/' + customerId)
-      .then((response) => {
-        const apiCustomer = { ...response.data,
-          registeredAt: response.data.registered_at, 
-          postalCode: response.data.postal_code,
-          accountCredit: response.data.account_credit,
-          videosCheckedOutCount: response.data.videos_checked_out_count,
-        };
-        setCustomer(apiCustomer);
-      })
-      .catch((error) => {
-        const message=`Customer info not found. ${error.message}.`;
-        setErrorMessage(message);
-        console.log(message);
-      })
-    }, [customerId, baseURL]);
+    axios.get(baseURL + '/customers/' + customerId)
+    .then((response) => {
+      const apiCustomer = { ...response.data,
+        registeredAt: response.data.registered_at, 
+        postalCode: response.data.postal_code,
+        accountCredit: response.data.account_credit,
+        videosCheckedOutCount: response.data.videos_checked_out_count,
+      };
+      setCustomer(apiCustomer);
+    })
+    .catch((error) => {
+      const message=`Customer info not found. ${error.message}.`;
+      setErrorMessage(message);
+      console.log(message);
+    })
+  }, [customerId, baseURL]);
+    
     
   //current rentals
-  useEffect(() => {
+  const loadCurrentRentals = () => {
     axios.get(baseURL + '/customers/' + customerId + '/current')
       .then((response) =>{
         if (response.data) {
@@ -55,10 +56,13 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
         setErrorMessage(message);
         console.log(message);
       })
-  }, [baseURL, customerId])
+  }
+  useEffect(() => {
+    loadCurrentRentals();
+  }, [])
 
   //rental history (already checked in)
-  useEffect(() => {
+  const loadRentalHistory = () => {
     axios.get(baseURL + '/customers/' + customerId + '/history')
       .then((response) =>{
         if (response.data) {
@@ -70,9 +74,10 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
         setErrorMessage(message);
         console.log(message);
       })
-  }, [baseURL, customerId])
-
-
+  }
+  useEffect(() => {
+    loadRentalHistory();
+  }, [])
 
 
   const onReturnVideo = (videoTitle) => {
@@ -85,10 +90,8 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
 
-        const newCurrentRentals = [...currentRentals]
-        setCurrentRentals(newCurrentRentals);
-        const newRentalHistory = [...rentalHistory]
-        setRentalHistory(newRentalHistory);
+        loadCurrentRentals();
+        loadRentalHistory();
 
         console.log(message);
       })
