@@ -62,9 +62,7 @@
   text-align: center;
 }
 
-.movie-details:hover .overview {
-  transform: translatey(0);
-}
+
 
 
 .searchbox{
