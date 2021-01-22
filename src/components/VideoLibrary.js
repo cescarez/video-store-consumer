@@ -12,14 +12,22 @@ const VideoLibrary = ({videoLibrary}) => {
   const listVideos = () => {
     return (
       <div>
-      {videos.map((video) => {
-        return(
+        <ul>
+      {videos.map((video) => (
+
+      <section className="movie-container">
+      <section className="movie-details">
+      <img className="move-image" src={video.image_url} alt='movie poster' />
+          <li key={video.external_id}>
           <Link to={`/videos/${video.title}`}>
             <li>{video.title}</li>
-            <img src={video.image_url} alt='movie poster' />
           </Link>
+          </li>
+          </section>
+          </section>
         )
-      })}
+    )}
+      </ul>
       </div>
     )
   }

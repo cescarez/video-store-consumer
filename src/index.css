@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap);
 body {
-background-color: #22254b;
+
 color: white;
 font-family: "Poppins", sans-serif;
 margin: 0;
@@ -8,25 +8,6 @@ margin: 0;
 
 * {
   box-sizing: border-box;
-}
-
-.movie {
-  width: 300px;
-  margin: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  /* background-color: #373b69; */
-}
-
-.movie img {
-  max-width: 100%;
-  margin: 1rem;
-  width: 250px;
-}
-
-.movie-info {
-  list-style: none;
-  list-style: none;
 }
 
 
