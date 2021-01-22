@@ -28,8 +28,8 @@ const CustomerList = ({ customerList, baseURL }) => {
           {customers.map((customer)=>{
             return(
               <tr>
-                <th>{customer.id}</th>
-                <th>
+                <td>{customer.id}</td>
+                <td>
                   <Link to={{
                     pathname:`/customers/${customer.id}`,
                     state: {
@@ -38,9 +38,9 @@ const CustomerList = ({ customerList, baseURL }) => {
                   }}>
                     {customer.name}
                   </Link>
-                </th>
-                <th>${customer.account_credit}</th>
-                <th>{customer.videos_checked_out_count}</th>
+                </td>
+                <td>${customer.account_credit}</td>
+                <td>{customer.videos_checked_out_count}</td>
                 {/* <th width='10%'><Button variant='secondary' onClick={() => {onSelectCustomerForRental(customer)}}>Select</Button></th> */}
               </tr>
             );
