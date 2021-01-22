@@ -18,6 +18,7 @@
   font-weight: 700;
   color: white;
   text-shadow: 0 3px 2px rgba(0,0,0,0.3);
+  list-style: none;
 }
 
 .movie-details{
@@ -50,6 +51,22 @@
   font-style: italic;
 }
 
+.overview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  transform: translatey(100%);
+  transition: transform 0.2s ease-in-out;
+  text-align: center;
+}
+
+.movie-details:hover .overview {
+  transform: translatey(0);
+}
+
+
 .searchbox{
   min-width: 5rem;
   width: 80%;
@@ -69,21 +86,6 @@
   font-weight: 300;
 
   transition: 0.4s ease-out; 
-}
-
-.overview {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  transform: translatey(100%);
-  transition: transform 0.2s ease-in-out;
-  text-align: center;
-}
-
-.movie-details:hover .overview {
-  transform: translatey(0);
 }
 
 .searchbox:focus {
