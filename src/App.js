@@ -20,6 +20,8 @@ function App() {
   const [customerList, setCustomerList] = useState([]);
   const [videoLibrary, setVideoLibrary] = useState([]);
 
+  const [overdueRentals, setOverdueRentals] = useState([]);
+
   const [searchResults, setSearchResults] = useState([]);
 
   const [selectedVideoTitle, setSelectedVideoTitle] = useState('');
@@ -51,6 +53,25 @@ function App() {
         console.log(message);
       })
   }, []);
+
+  //overdue rentals
+  const loadOverdueRentals = () => {
+    axios.get(BASE_URL + '/rentals/overdue')
+      .then((response) =>{
+        if (response.data) {
+          setOverdueRentals(response.data);
+        }
+        console.log(`overdue rentals: ${overdueRentals.length}`)
+      })
+      .catch((error) => {
+        const message=`Overdue rentals not loaded. ${error.message}.`;
+        setErrorMessage(message);
+        console.log(message);
+      })
+  }
+  useEffect(() => {
+    loadOverdueRentals();
+  }, [])
 
   //search results
   const onSearchRequestCallback = (searchTerm) => {
@@ -143,7 +164,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/customers/:id" >
-              <Customer baseURL={BASE_URL} onSelectCustomerForRental={onSelectCustomerForRentalCallback} />
+              <Customer baseURL={BASE_URL} onSelectCustomerForRental={onSelectCustomerForRentalCallback} overdueRentals={overdueRentals} loadOverdueRentals={loadOverdueRentals} />
             </Route>
             <Route path="/customerlist">
               <CustomerList customerList={customerList} />
@@ -152,7 +173,7 @@ function App() {
               <Video baseURL={BASE_URL} onSelectVideoForRental={onSelectVideoForRentalCallback}/>
             </Route>
             <Route path="/videolibrary">
-              <VideoLibrary videoLibrary={videoLibrary} />
+              <VideoLibrary videoLibrary={videoLibrary} overdueRentals={overdueRentals} loadOverdueRentals={loadOverdueRentals} />
             </Route>
             <Route path="/search">
               <Search videoLibrary={videoLibrary} searchResults={searchResults} addToCollection={addToCollectionCallback} onSearchRequest={onSearchRequestCallback} />
