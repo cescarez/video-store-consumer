@@ -20,22 +20,25 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
   const videoTitle = match.params.title
 
   //get video info
+  const loadVideoInfo = () => {
+    axios.get(baseURL + '/videos/' + videoTitle)
+    .then((response) => {
+      const film = { ...response.data,
+        availableInventory: response.data.available_inventory, 
+        releaseDate: response.data.release_date,
+      };
+      console.log(film)
+      setVideo(film)
+    })
+    .catch((error) => {
+      const message=`Video did not load. ${error.message}.`;
+      setErrorMessage(message);
+      console.log(message);
+    })
+  }
   useEffect(() => {
-      axios.get(baseURL + '/videos/' + videoTitle)
-      .then((response) => {
-        const film = { ...response.data,
-          availableInventory: response.data.available_inventory, 
-          releaseDate: response.data.release_date,
-        };
-        console.log(film)
-        setVideo(film)
-      })
-      .catch((error) => {
-        const message=`Video did not load. ${error.message}.`;
-        setErrorMessage(message);
-        console.log(message);
-      })
-    }, [videoTitle, baseURL]);
+    loadVideoInfo();
+  }, []);
 
 
   //current rentals
@@ -84,11 +87,8 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
     axios.post(baseURL + '/rentals/' + videoTitle + '/return', videoToReturn)
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
-        const currentCustomer = response.data.customer
-        console.log(response.data)
-        console.log('customer key:')
-        console.log(response.data.customer)
 
+        loadVideoInfo();
         loadCurrentRentals();
         loadRentalHistory();
 

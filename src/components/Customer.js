@@ -24,7 +24,7 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
   const match = useRouteMatch('/customers/:id');
   const customerId = match.params.id
 
-  useEffect(() => {
+  const loadCustomerData = () => {
     axios.get(baseURL + '/customers/' + customerId)
     .then((response) => {
       const apiCustomer = { ...response.data,
@@ -40,7 +40,11 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
       setErrorMessage(message);
       console.log(message);
     })
-  }, [customerId, baseURL]);
+  }
+
+  useEffect(() => {
+    loadCustomerData();
+  }, []);
     
     
   //current rentals
@@ -90,6 +94,7 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
 
+        loadCustomerData();
         loadCurrentRentals();
         loadRentalHistory();
 
@@ -101,6 +106,7 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
         console.log(message);
       })
   }
+
 
   const listVideos = (videos) => {
     return (
@@ -118,12 +124,7 @@ const Customer = ( { baseURL, onSelectCustomerForRental }) => {
             return(
               <tr>
                 <td>
-                  <Link to={{
-                    pathname:`/videos/${video.title}`,
-                    state: {
-                      baseURL: baseURL, 
-                    }
-                  }}>
+                  <Link to={`/videos/${video.title}`}>
                     {video.title}
                   </Link>
                 </td>
