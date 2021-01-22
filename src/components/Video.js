@@ -4,7 +4,7 @@ import { Table, Button } from 'react-bootstrap';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 
-const Video = ( { onSelectVideoForRental, baseURL }) => {
+const Video = ( { onSelectVideoForRental, baseURL, overdueRentals, loadOverdueRentals }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [video, setVideo] = useState({
     availableInventory: 0,
@@ -73,10 +73,11 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
         console.log(message);
       })
   }
-   
   useEffect(() => {
     loadRentalHistory();
   }, [])
+
+
 
   const onReturnVideo = (customerId) => {
     const videoToReturn = {
@@ -91,6 +92,7 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
         loadVideoInfo();
         loadCurrentRentals();
         loadRentalHistory();
+        loadOverdueRentals();
 
         console.log(message);
       })
@@ -103,7 +105,7 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
 
   const listCustomers = (customers) => {
     return (
-      <Table striped bordered hover size="sm">
+      <Table bordered hover size="sm">
         <thead>
           <tr>
             <th>Customer ID #</th>
@@ -115,8 +117,9 @@ const Video = ( { onSelectVideoForRental, baseURL }) => {
         </thead>
         <tbody>
           {customers.map((customer)=>{
+            const overdue = (overdueRentals ? (overdueRentals.find((rental) => (rental.video === videoTitle && rental.customer_id === customer.id))) : null)
             return(
-              <tr>
+              <tr className={overdue ? 'overdue' : 'customer'}>
                 <td>{customer.id}</td>
                 <td>
                   <Link to={{
