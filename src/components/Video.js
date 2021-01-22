@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+
 const Video = ( { match, location }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [video, setVideo] = useState({
@@ -73,6 +74,8 @@ const Video = ( { match, location }) => {
     console.log(`${video.title} selected for rental`)
   }
 
+
+
   const onReturnVideo = (customerId) => {
     const videoToReturn = {
       title: videoTitle,
@@ -82,11 +85,12 @@ const Video = ( { match, location }) => {
     axios.post(baseURL + '/rentals/' + videoTitle + '/return', videoToReturn)
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
+        const currentCustomer = response.data.customer
 
-        // const newCurrentRentals = [...currentRentals]
-        // setCurrentRentals(newCurrentRentals);
-        // const newRentalHistory = [...rentalHistory]
-        // setRentalHistory(newRentalHistory);
+        const newCurrentRentals = currentRentals.filter(customer => (customer.id !== currentCustomer.id) ) 
+        setCurrentRentals(newCurrentRentals);
+        const newRentalHistory = [...rentalHistory, currentCustomer]
+        setRentalHistory(newRentalHistory);
 
         console.log(message);
       })
@@ -102,7 +106,7 @@ const Video = ( { match, location }) => {
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>ID #</th>
+            <th>Customer ID #</th>
             <th>Name</th>
             <th>Date Checked Out</th>
             <th>Date Due</th>
