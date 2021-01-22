@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Search.css';
+import { Button } from 'react-bootstrap';
 
 function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,27 +24,31 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
 
   const displaySearchResults = () => {
     return (
-      <div className="movie">
-      <ul className="movie-info">
+      <div>
+      <ul>
         {
-          searchResults.map((result) => {
-            return(
-              <div className="container">
+          searchResults.map((result) => (
+              <section className="movie-container">
+                <section className="movie-details">
+                <img className="move-image" src={result.image_url} alt='movie poster' />
               <li key={result.external_id}>
-                <h3>{result.title}</h3>
-                <span><small>Release Date: {result.release_date}</small></span>
-                <img src={result.image_url} alt='movie poster' />
-                { libraryTitles.includes(result.title) ? <div>Title in Library</div> : <button onClick={() => addToCollection(result)}>Add Title to Library</button> }
+                <h3 className="movie-title">{result.title}</h3>
+                <p className="movie-release-date"> Release Date: {result.release_date}</p>
+                <div className="overview">
+                <h2>Overview</h2>
+                <p>{result.overview} { libraryTitles.includes(result.title) ? <div className="title-in-library">Title in Library</div> : <Button variant="warning"  onClick={() => addToCollection(result)}>Add Title to Library</Button> }</p>
+                </div>
+                
               </li>
-              </div>
-            );
-          })
+              </section>
+              </section>
+            )
+          )
         }
       </ul>
       </div>
     );
   }
-
 
   return (
     <div>
@@ -55,7 +60,7 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
         name='search-term' 
         onChange={onInputChange}>
       </input>
-      <button onClick={() => onSearchRequest(searchTerm)}>Search</button>
+      <Button variant="light" onClick={() => onSearchRequest(searchTerm)}>Search</Button>
       { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : displaySearchResults() }
     </div>
   );

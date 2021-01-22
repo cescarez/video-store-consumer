@@ -1,17 +1,53 @@
-.movie {
-  width: 300px;
-  margin: 1rem;
-  /* background-color: #373b69; */
+.movie-container {
+  border-radius: 25px;
+  margin: 25px;
+  margin-top: 25px;
+  width: 450px;
+  height: 520px;
+  padding: 20px 5px 20px 5px;
+  display: inline-grid;
+  align-items: center;
+  justify-self: center;
+  background-color: #373b69;
 }
 
-.movie img {
-  max-width: 100%;
-  margin: 1rem;
-  width: 250px;
+.movie-title {
+  font-size: 25px;
+  font-style: italic;
+  padding: 15px 45px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 3px 2px rgba(0,0,0,0.3);
 }
 
-.movie-info {
-  list-style: none;
+.movie-details{
+  position: relative;
+  overflow: hidden;
+
+}
+
+.movie-image {
+  width: 25%;
+  height: auto;
+  margin: auto;
+  float: right;
+  position: absolute;
+  left: 3%;
+  top: 20%
+}
+
+.movie-release-date {
+  font-size: 15px;
+  /* font-style: italic; */
+  padding: 15px 45px;
+  font-weight: 700;
+  color: white;
+
+}
+
+.title-in-library{
+  color: white;
+  font-style: italic;
 }
 
 .searchbox{
@@ -33,6 +69,21 @@
   font-weight: 300;
 
   transition: 0.4s ease-out; 
+}
+
+.overview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  transform: translatey(100%);
+  transition: transform 0.2s ease-in-out;
+  text-align: center;
+}
+
+.movie-details:hover .overview {
+  transform: translatey(0);
 }
 
 .searchbox:focus {
