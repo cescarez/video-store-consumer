@@ -119,18 +119,19 @@ function App() {
 
   //video selection callback
   const onSelectVideoForRentalCallback = (videoTitle) => {
-    sessionStorage.setItem('selectedVideoTitle', videoTitle)
-    setSelectedVideoTitle(videoTitle)
+    sessionStorage.setItem('selectedVideoTitle', videoTitle);
+    setSelectedVideoTitle(videoTitle);
     console.log(`${videoTitle} selected for rental`)
   }
 
   //user selection callback
-  const onSelectCustomerForRental = (customerId, customerName) => {
+  const onSelectCustomerForRentalCallback = (customerId, customerName) => {
     sessionStorage.setItem('selectedCustomerId', customerId)
     sessionStorage.setItem('selectedCustomerName', customerName)
+    setSelectedCustomerId(customerId);
+    setSelectedCustomerName(customerName);
     console.log(`${customerName}, id: ${customerId} selected for rental`)
   }
-
 
   return (
     <Router>
@@ -141,15 +142,17 @@ function App() {
         { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : 
           <Switch>
             <Route path="/" exact component={Home}/>
-            <Route path="/customers/:id" component={Customer}/>
+            <Route path="/customers/:id" >
+              <Customer baseURL={BASE_URL} onSelectCustomerForRental={onSelectCustomerForRentalCallback} />
+            </Route>
             <Route path="/customerlist">
-              <CustomerList customerList={customerList} baseURL={BASE_URL}/>
+              <CustomerList customerList={customerList} />
             </Route>
             <Route path="/videos/:title">
-              <Video baseURL={BASE_URL}  onSelectVideoForRental={onSelectVideoForRentalCallback}/>
+              <Video baseURL={BASE_URL} onSelectVideoForRental={onSelectVideoForRentalCallback}/>
             </Route>
             <Route path="/videolibrary">
-              <VideoLibrary videoLibrary={videoLibrary} baseURL={BASE_URL} />
+              <VideoLibrary videoLibrary={videoLibrary} />
             </Route>
             <Route path="/search">
               <Search videoLibrary={videoLibrary} searchResults={searchResults} addToCollection={addToCollectionCallback} onSearchRequest={onSearchRequestCallback} />

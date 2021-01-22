@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 
 
-const Customer = ( { match, location }) => {
+const Customer = ( { baseURL, onSelectCustomerForRental }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [customer, setCustomer] = useState({
     id: -1,
@@ -21,9 +21,8 @@ const Customer = ( { match, location }) => {
   const [currentRentals, setCurrentRentals] = useState([]);
   const [rentalHistory, setRentalHistory] = useState([]);
 
+  const match = useRouteMatch('/customers/:id');
   const customerId = match.params.id
-  const { baseURL } = location.state
-
 
   useEffect(() => {
       axios.get(baseURL + '/customers/' + customerId)
@@ -100,8 +99,6 @@ const Customer = ( { match, location }) => {
       })
   }
 
-
-
   const listVideos = (videos) => {
     return (
       <Table striped bordered hover size="sm">
@@ -142,7 +139,7 @@ const Customer = ( { match, location }) => {
     return (
       <div>
         <h3>{customer.name}</h3>
-        <button onClick={onSelectCustomerForRental}>Select Customer for Rental</button><br/>
+        <button onClick={()=>onSelectCustomerForRental(customer.id, customer.name)}>Select Customer for Rental</button><br/>
         <small>Account Credit: ${customer.accountCredit}</small><br/>
         <small>Videos Checked Out: {customer.videosCheckedOutCount}</small><br/>
         <h4>Current Rentals</h4>
