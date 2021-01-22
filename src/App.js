@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import Home from './components/Home';
 import Customer from './components/Customer';
 import CustomerList from './components/CustomerList';
@@ -26,7 +25,7 @@ function App() {
   const [selectedCustomerId, setSelectedCustomerId] = useState('');
   const [selectedCustomerName, setSelectedCustomerName] = useState('');
 
-  useEffect(() => {
+  const loadVideoLibrary = () => {
     axios.get(BASE_URL + '/videos')
     .then((response) => {
       const apiVideoLibrary = response.data;
@@ -37,6 +36,10 @@ function App() {
       setErrorMessage(message);
       console.log(message);
     })
+  }
+
+  useEffect(() => {
+    loadVideoLibrary();
   }, []);
 
   useEffect(()=> {
@@ -66,13 +69,13 @@ function App() {
       })
   }
 
-  const addToCollectionCallback = (result) => {
-    axios.post(BASE_URL + '/videos', result )
+  //add to collection from Search
+  const addToCollectionCallback = (movie, searchTerm) => {
+    axios.post(BASE_URL + '/videos', movie )
     .then((response) => {
-      const message =`${result.title} Added to Collection!`; 
-      const newSearchResults = [...searchResults];
-      setSearchResults(newSearchResults);
+      const message =`${movie.title} Added to Collection!`; 
       console.log(message);
+
     })
     .catch((error) => {
       const message=`Error. Video could not be added to collection. ${error.message}.`;
@@ -102,6 +105,7 @@ function App() {
     axios.post(BASE_URL + '/rentals/'+ selectedVideoTitle + '/check-out', rentalObject )
     .then((response) => {
 
+      loadVideoLibrary();
       setSelectedVideoTitle('');
       setSelectedCustomerId('');
       setSelectedCustomerName('');

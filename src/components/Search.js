@@ -8,35 +8,43 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
   const [errorMessage, setErrorMessage] = useState('');
 
   const [libraryTitles, setLibraryTitles] = useState([]);
-  useEffect(() => {
+
+  //extract library titles for searching
+  const stringifyLibraryTitles = () => {
     const apiLibraryTitles = videoLibrary.map((movie) =>{
       return movie.title;
     });
     setLibraryTitles(apiLibraryTitles);
-  }, [videoLibrary])
+  }
+  useEffect(() => {
+    stringifyLibraryTitles();
+  }, [])
 
   const onInputChange = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
   }
-
-
+  
+  const onSelectSearchResult = (movie) => {
+    stringifyLibraryTitles();
+    addToCollection(movie, searchTerm);
+  }
 
   const displaySearchResults = () => {
     return (
       <div>
       <ul>
         {
-          searchResults.map((result) => (
+          searchResults.map((movie) => (
               <section className="movie-container">
                 <section className="movie-details">
-                <img className="move-image" src={result.image_url} alt='movie poster' />
-              <li key={result.external_id}>
-                <h3 className="movie-title">{result.title}</h3>
-                <p className="movie-release-date"> Release Date: {result.release_date}</p>
+                <img className="move-image" src={movie.image_url} alt='movie poster' />
+              <li key={movie.external_id}>
+                <h3 className="movie-title">{movie.title}</h3>
+                <p className="movie-release-date"> Release Date: {movie.release_date}</p>
                 <div className="overview">
                 <h2>Overview</h2>
-                <p>{result.overview} { libraryTitles.includes(result.title) ? <div className="title-in-library">Title in Library</div> : <Button variant="warning"  onClick={() => addToCollection(result)}>Add Title to Library</Button> }</p>
+                <p>{movie.overview} { libraryTitles.includes(movie.title) ? <div className="title-in-library">Title in Library</div> : <Button variant="warning"  onClick={()=> onSelectSearchResult(movie)}>Add Title to Library</Button> }</p>
                 </div>
                 
               </li>

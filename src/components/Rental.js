@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 
 // const Rental = ({onRentalRequest, selectedCustomerId, selectedCustomerName, selectedVideoTitle}) => {
 const Rental = ({onRentalRequest, selectedCustomerName, selectedVideoTitle, selectedCustomerId}) => {
