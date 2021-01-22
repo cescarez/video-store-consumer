@@ -5,7 +5,7 @@ import { Table } from 'react-bootstrap';
 import './CustomerList.css';
 
 
-const CustomerList = ({ customerList, baseURL }) => {
+const CustomerList = ({ customerList }) => {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
@@ -27,15 +27,10 @@ const CustomerList = ({ customerList, baseURL }) => {
         <tbody>
           {customers.map((customer)=>{
             return(
-              <tr>
+              <tr key={customer.id}>
                 <td>{customer.id}</td>
                 <td>
-                  <Link to={{
-                    pathname:`/customers/${customer.id}`,
-                    state: {
-                      baseURL: baseURL, 
-                    }
-                  }}>
+                  <Link to={`/customers/${customer.id}`}>
                     {customer.name}
                   </Link>
                 </td>

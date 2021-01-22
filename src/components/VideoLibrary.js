@@ -22,7 +22,7 @@ const VideoLibrary = ({videoLibrary}) => {
           <div key={video.external_id}>
             <div className="movie-title">
             <Link to={`/videos/${video.title}`}>
-              <li className="movie-title">{video.title}</li>
+              <li key={video.external_id} className="movie-title">{video.title}</li>
             </Link>
             </div>
             </div>
