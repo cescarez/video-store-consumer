@@ -1,0 +1,46 @@
+.move-container {
+  border-radius: 25px;
+  margin: 25px;
+  margin-top: 25px;
+  width: 300px;
+  height: 500px;
+  padding: 20px 5px 20px 5px;
+  display: inline-grid;
+  align-items: center;
+  justify-self: center;
+  background-color: #373b69;
+}
+
+.movie-title {
+  font-size: 25px;
+  font-style: italic;
+  padding: 15px 45px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 3px 2px rgba(0,0,0,0.3);
+  list-style: none;
+}
+
+.movie-title:hover{
+  color: orchid;
+}
+
+.movie-details{
+  position: absolute;
+  overflow: hidden;
+
+}
+
+.movie-release-date {
+  font-size: 15px;
+  /* font-style: italic; */
+  padding: 15px 45px;
+  font-weight: 700;
+  color: white;
+
+}
+
+.title-in-library{
+  color: white;
+  font-style: italic;
+}
