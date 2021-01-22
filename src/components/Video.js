@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Video = ( { match, location }) => {
@@ -72,6 +72,28 @@ const Video = ( { match, location }) => {
     console.log(`${video.title} selected for rental`)
   }
 
+  const onReturnVideo = (customerId) => {
+    const videoToReturn = {
+      title: videoTitle,
+      // eslint-disable-next-line camelcase
+      customer_id: customerId,
+    }
+    axios.post(baseURL + '/rentals/' + videoTitle + '/return', videoToReturn)
+      .then((response) => {
+        const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
+        const newCurrentRentals = [...currentRentals]
+        setCurrentRentals(newCurrentRentals);
+        const newRentalHistory = [...rentalHistory]
+        setRentalHistory(newRentalHistory);
+        console.log(message);
+      })
+      .catch((error) => {
+        const message=`Rental history not loaded. ${error.message}.`;
+        setErrorMessage(message);
+        console.log(message);
+      })
+  }
+
   const listCustomers = (customers) => {
     return (
       <Table striped bordered hover size="sm">
@@ -101,7 +123,7 @@ const Video = ( { match, location }) => {
                 </td>
                 <td>{customer.checkout_date}</td>
                 <td>{customer.due_date}</td>
-                <td>{customer.checkin_date ? customer.checkin_date : 'Title has not been returned.'}</td>
+                <td>{customer.checkin_date ? customer.checkin_date : <Button onClick={()=>onReturnVideo(customer.id)}>Return Title</Button>}</td>
               </tr>
             );
           })}
