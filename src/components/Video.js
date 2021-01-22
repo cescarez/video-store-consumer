@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 
-const Video = ( { match, location }) => {
+const Video = ( { onSelectVideoForRental, baseURL }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [video, setVideo] = useState({
     availableInventory: 0,
@@ -16,8 +16,8 @@ const Video = ( { match, location }) => {
   const [currentRentals, setCurrentRentals] = useState([]);
   const [rentalHistory, setRentalHistory] = useState([]);
 
+  const match = useRouteMatch('/videos/:title');
   const videoTitle = match.params.title
-  const { baseURL } = location.state
 
   //get video info
   useEffect(() => {
@@ -68,14 +68,6 @@ const Video = ( { match, location }) => {
       })
   }, [baseURL, videoTitle])
 
-
-  const onSelectVideoForRental = () => {
-    sessionStorage.setItem('selectedVideoTitle', video.title)
-    console.log(`${video.title} selected for rental`)
-  }
-
-
-
   const onReturnVideo = (customerId) => {
     const videoToReturn = {
       title: videoTitle,
@@ -86,6 +78,9 @@ const Video = ( { match, location }) => {
       .then((response) => {
         const message =`${videoToReturn} outstanding rental by customer id ${customerId} has been checked in.`; 
         const currentCustomer = response.data.customer
+        console.log(response.data)
+        console.log('customer key:')
+        console.log(response.data.customer)
 
         const newCurrentRentals = currentRentals.filter(customer => (customer.id !== currentCustomer.id) ) 
         setCurrentRentals(newCurrentRentals);
@@ -143,7 +138,7 @@ const Video = ( { match, location }) => {
     return (
       <div>
         <h3>{video.title}</h3>
-        <button onClick={onSelectVideoForRental}>Select Video for Rental</button><br/>
+        <Button onClick={()=>onSelectVideoForRental(video.title)}>Select Video for Rental</Button><br/>
         <small>{video.releaseDate}</small>
         <p>{video.overview}</p>
         <p>Available: {video.availableInventory} of {video.inventory}</p>

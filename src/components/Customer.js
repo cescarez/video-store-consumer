@@ -74,11 +74,7 @@ const Customer = ( { match, location }) => {
   }, [baseURL, customerId])
 
 
-  const onSelectCustomerForRental = () => {
-    sessionStorage.setItem('selectedCustomerId', customer.id)
-    sessionStorage.setItem('selectedCustomerName', customer.name)
-    console.log(`${customer.name}, id: ${customer.id} selected for rental`)
-  }
+
 
   const onReturnVideo = (videoTitle) => {
     const videoToReturn = {

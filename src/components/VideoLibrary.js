@@ -4,7 +4,7 @@ import './VideoLibrary.css';
 
 
 
-const VideoLibrary = ({videoLibrary, baseURL}) => {
+const VideoLibrary = ({videoLibrary, baseURL, onSelectVideoForRental}) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const VideoLibrary = ({videoLibrary, baseURL}) => {
               pathname:`/videos/${video.title}`,
               state: {
                 baseURL: baseURL, 
-              }
+              },
             }}>
               <li className="movie-title">{video.title}</li>
             </Link>
