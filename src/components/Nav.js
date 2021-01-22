@@ -1,9 +1,11 @@
 import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
-function Nav() {
+function Navigation() {
   return (
+
     <nav className="navbar">
       <h3 className="welcome">WELCOME AGAIN</h3>
       <ul className="nav-link">
@@ -24,4 +26,4 @@ function Nav() {
   )
 };
 
-export default Nav; 
+export default Navigation; 
