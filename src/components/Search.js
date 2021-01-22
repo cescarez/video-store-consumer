@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './Search.css';
 import { Button } from 'react-bootstrap';
 
 function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const [libraryTitles, setLibraryTitles] = useState([]);
 
@@ -24,15 +22,9 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
   }
-  
-  const onSelectSearchResult = (movie) => {
-    stringifyLibraryTitles();
-    addToCollection(movie, searchTerm);
-  }
 
   const displaySearchResults = () => {
     return (
-      <div>
       <ul>
         {
           searchResults.map((movie) => (
@@ -54,7 +46,6 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
           )
         }
       </ul>
-      </div>
     );
   }
 
@@ -69,7 +60,7 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
         onChange={onInputChange}>
       </input>
       <Button variant="success" onClick={() => onSearchRequest(searchTerm)}>Search</Button>
-      { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : displaySearchResults() }
+      { displaySearchResults() }
     </div>
   );
 }
