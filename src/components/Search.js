@@ -36,7 +36,7 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
                 <p className="movie-release-date"> Release Date: {result.release_date}</p>
                 <div className="overview">
                 <h2>Overview</h2>
-                <p>{result.overview} { libraryTitles.includes(result.title) ? <div className="title-in-library">Title in Library</div> : <Button variant="warning"  onClick={() => addToCollection(result)}>Add Title to Library</Button> }</p>
+                <p>{result.overview} { libraryTitles.includes(result.title) ? <p className="title-in-library">Title in Library</p> : <Button variant="warning"  onClick={() => addToCollection(result)}>Add Title to Library</Button> }</p>
                 </div>
                 
               </li>
