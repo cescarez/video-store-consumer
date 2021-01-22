@@ -1,9 +1,14 @@
 import React from 'react';
-// import './Home.css';
+
+import Image from '../image/hollywood-video-logo-vector.png'
 
 function Home() {
   return (
-   <h3>Home</h3>
+  <div>
+    <h3>Home</h3>
+    <img className="home-image" src={Image} alt='movie poster' />
+  </div>
+
   );
 }
 

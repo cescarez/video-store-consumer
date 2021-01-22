@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import './VideoLibrary.css';
+
 
 
 const VideoLibrary = ({videoLibrary, baseURL}) => {
@@ -12,19 +14,28 @@ const VideoLibrary = ({videoLibrary, baseURL}) => {
   const listVideos = () => {
     return (
       <div>
-        {videos.map((video) => {
-          return(
+        <ul>
+        {videos.map((video) => (
+          <section className="move-container">
+          <section className="movie-details">
+          <img className="move-image" src={video.image_url} alt='movie poster' />
+          <div key={video.external_id}>
+            <div className="movie-title">
             <Link to={{
               pathname:`/videos/${video.title}`,
               state: {
                 baseURL: baseURL, 
               }
             }}>
-              <li>{video.title}</li>
-              <img src={video.image_url} alt='movie poster' />
+              <li className="movie-title">{video.title}</li>
             </Link>
+            </div>
+            </div>
+            </section>
+            </section>
           )
-        })}
+    )}
+        </ul>
       </div>
     )
   }
