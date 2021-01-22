@@ -60,7 +60,7 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
         name='search-term' 
         onChange={onInputChange}>
       </input>
-      <Button variant="light" onClick={() => onSearchRequest(searchTerm)}>Search</Button>
+      <Button variant="success" onClick={() => onSearchRequest(searchTerm)}>Search</Button>
       { errorMessage ? <h3 className='error-message'>{errorMessage}</h3> : displaySearchResults() }
     </div>
   );

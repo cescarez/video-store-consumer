@@ -29,6 +29,30 @@
   color: white;
 }
 
+.welcome:hover {
+  color: lightsalmon;
+}
+
+.Home:hover {
+  color: #EC7063;
+  font-weight: bolder;
+}
+
+.Customer:hover {
+  color: yellow;
+  font-weight: bolder;
+}
+
+.VideoLibrary:hover {
+  color: #D35400;
+  font-weight: bolder;
+}
+
+.Search:hover {
+  color: #D4AC0D;
+  font-weight: bolder;
+}
+
 .router__div--selected-item {
   background-color: rgb(165, 127, 255);
   font-size: smaller;

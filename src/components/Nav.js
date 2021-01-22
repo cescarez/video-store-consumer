@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 function Nav() {
   return (
     <nav className="navbar">
-      <h3>WELCOME AGAIN</h3>
+      <h3 className="welcome">WELCOME AGAIN</h3>
       <ul className="nav-link">
         <Link to='/' className="link">
-          <li>Home</li>
+          <li className="Home">Home</li>
         </Link>
         <Link to='/customerlist' className="link">
-          <li>Customers</li>
+          <li className="Customer">Customers</li>
         </Link>
         <Link to='/videolibrary' className="link">
-          <li>Video Library</li>
+          <li className="VideoLibrary">Video Library</li>
         </Link>
         <Link to='/search' className="link">
-          <li>Search Videos</li>
+          <li className="Search">Search Videos</li>
         </Link>
       </ul>
     </nav>
