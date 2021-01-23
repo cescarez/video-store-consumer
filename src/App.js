@@ -12,7 +12,7 @@ import Nav from './components/Nav';
 import Rental from './components/Rental'
 import './App.css';
 
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'https://videostore-api.herokuapp.com'
 
 function App() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -77,7 +77,7 @@ function App() {
   }, [])
 
   //search results
-  const onSearchRequestCallback = (searchTerm) => {
+  const loadSearchResultsCallback = (searchTerm) => {
     axios.get(BASE_URL + '/videos?query=' + searchTerm)
       .then((response) => {
         const apiSearchResults = response.data;
@@ -96,7 +96,6 @@ function App() {
     .then((response) => {
       const message =`${movie.title} Added to Collection!`; 
       console.log(message);
-
     })
     .catch((error) => {
       const message=`Error. Video could not be added to collection. ${error.message}.`;
@@ -180,7 +179,7 @@ function App() {
               <VideoLibrary videoLibrary={videoLibrary} overdueRentals={overdueRentals} loadOverdueRentals={loadOverdueRentals} />
             </Route>
             <Route path="/search">
-              <Search videoLibrary={videoLibrary} searchResults={searchResults} addToCollection={addToCollectionCallback} onSearchRequest={onSearchRequestCallback} />
+              <Search videoLibrary={videoLibrary} searchResults={searchResults} addToCollection={addToCollectionCallback} loadSearchResults={loadSearchResultsCallback} />
             </Route>
           </Switch>
         }

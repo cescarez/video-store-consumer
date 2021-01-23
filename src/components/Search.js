@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Search.css';
 import { Button } from 'react-bootstrap';
 
-function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults }) {
+function Search({ videoLibrary, addToCollection, searchResults, loadSearchResults }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [dummyState, setDummyState] = useState(false);
 
   const [libraryTitles, setLibraryTitles] = useState([]);
 
@@ -48,6 +49,11 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
     );
   }
 
+  const onSearchRequestSelection = (searchTerm) => {
+    loadSearchResults(searchTerm);
+    setDummyState(true)
+  }
+
   return (
     <div>
       <h3>Search</h3>
@@ -58,7 +64,7 @@ function Search({ videoLibrary, addToCollection, onSearchRequest, searchResults 
         name='search-term' 
         onChange={onInputChange}>
       </input>
-      <Button variant="success" onClick={() => onSearchRequest(searchTerm)}>Search</Button>
+      <Button variant="success" onClick={() => onSearchRequestSelection(searchTerm)}>Search</Button>
       { displaySearchResults() }
     </div>
   );
